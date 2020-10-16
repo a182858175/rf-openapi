@@ -4,10 +4,18 @@ import CashLogController from './controllers/CashLogController';
 
 const routes = Router();
 
+/**
+  USERSTATUS ROUTES
+*/
 routes.get('/userstatus', UserStatusController.list);
 routes.post('/userstatus/store', UserStatusController.store);
 routes.patch('/userstatus/:id', UserStatusController.update);
 
+/**
+  CASHLOG ROUTES
+*/
 routes.get('/cashlog', CashLogController.list);
+routes.get('/cashlog/account/:account', CashLogController.listByParam);
+routes.get('/cashlog/char/:char', CashLogController.listByParam);
 
 export default routes;
