@@ -42,6 +42,8 @@ _You can check all availables endpoints inside src/routes_
 
 #### tbl_CashLog
 
-| METHOD | URL      | RETURN                  |
-| ------ | -------- | ----------------------- |
-| GET    | /cashlog | tbl_CashLog information |
+| METHOD | URL                       | RETURN                                      |
+| ------ | ------------------------- | ------------------------------------------- |
+| GET    | /cashlog                  | tbl_CashLog information                     |
+| GET    | /cashlog/account/:account | Query information about specified account   |
+| GET    | /cashlog/char/:char       | Query information about specified character |
