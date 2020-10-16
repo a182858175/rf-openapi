@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { tbl_UserStatus } from '../models/BILLING/TblUserStatus';
-import { format } from 'date-fns';
+import * as yup from 'yup';
 
 class UserStatusController {
   async list(req: Request, res: Response) {
@@ -12,34 +12,47 @@ class UserStatusController {
   }
 
   async store(req: Request, res: Response) {
+    /**
+     * Validates data sent by the client
+     */
+    const schema = yup.object().shape({
+      id: yup.string().required(),
+      status: yup.string().required(),
+      dtStartPrem: yup.date().required(),
+      dtEndPrem: yup.date().required(),
+      cash: yup.number().required()
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).send({ error: "Invalid params" });
+    }
+
     const billingRepo = getRepository(tbl_UserStatus, 'BILLING');
 
-    const { id, cash, amount_days } = req.body;
+    const { id, status, dtStartPrem, dtEndPrem, cash } = req.body;
 
+    /**
+     * Check if user already exists
+     */
     const userExists = await billingRepo.findOne({
       where: {
         id,
       },
     });
+
     if (userExists) {
-      return res.status(400)
-        .send({
-          error: 'User already exists try update route',
-        });
+      return res.status(400).send({ error: 'User already exists try update route' });
     }
 
-    let end = new Date(Date.now());
-    const begin = new Date(Date.now());
-    if (amount_days !== 0) {
-      end.setDate(end.getDate() + amount_days);
-    }
-
+    /**
+     * Create user instance and save
+     */
     const user = billingRepo.create({
       id,
       cash,
-      status: 1,
-      dtStartPrem: begin,
-      dtEndPrem: end
+      status,
+      dtStartPrem,
+      dtEndPrem
     });
 
     billingRepo.save(user);
@@ -48,33 +61,35 @@ class UserStatusController {
   }
 
   async update(req: Request, res: Response) {
+    /**
+     * Validates data sent by the client
+     */
+
     const { id } = req.params;
-    const { cash, status, amount_days } = req.body;
+    const args = ['cash', 'status', 'dtStartPrem', 'dtEndPrem']
 
     const billingRepo = getRepository(tbl_UserStatus, 'BILLING');
 
+    /**
+     * Check if user exists
+     */
     const user = await billingRepo.findOne({ where: { id } });
     if (!user) {
       return res.status(400).send({ error: "User doesn't exists" })
     }
 
-    let end = new Date(Date.now());
-    if (amount_days !== 0 && amount_days) {
-      end.setDate(end.getDate() + amount_days);
-    }
+    /**
+     * Loop through object, validates if params are allowed and increments if cash
+     */
+    Object.keys(req.body).forEach(param => {
+      if (args.includes(param)) {
+        user[param] = (param === 'cash') ? (user[param] + req.body[param]) : (req.body[param]);
+      }
+    });
 
-    if (cash !== 0 && cash) {
-      user.cash += cash;
-    }
-
-    if (status) {
-      user.status = status;
-    }
-
-    user.dtEndPrem = amount_days ? end : user.dtEndPrem;
     billingRepo.save(user);
 
-    res.send({ success: "User updated" })
+    res.send(user)
 
   }
 }
