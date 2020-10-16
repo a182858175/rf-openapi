@@ -55,4 +55,8 @@ createConnections([
       "migrationsDir": "src/database/migrations/world"
     }
   }
-])
+]).then(() => {
+  console.log("Connected to MSSQL Server")
+}).catch((err) => {
+  console.log("Failed to connect to MSSQL Server")
+})
