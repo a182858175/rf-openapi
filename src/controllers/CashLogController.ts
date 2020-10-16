@@ -15,6 +15,20 @@ class CashLogController {
     return res.send({ logs });
   }
 
+  async listByParam(req: Request, res: Response) {
+    const billingRepo = getRepository(TblCashLog, "BILLING");
+
+    const url = req.url.split("/");
+
+    const logs = await billingRepo.find({ where: `${url[2]} = '${url[3]}'` });
+    if (!logs) {
+      return res.status(400).send({ error: "Empty logs" });
+    }
+
+    return res.send({ logs });
+  }
+
+
 }
 
 export default new CashLogController();
