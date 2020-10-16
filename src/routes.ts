@@ -9,7 +9,5 @@ routes.post('/userstatus/store', UserStatusController.store);
 routes.patch('/userstatus/:id', UserStatusController.update);
 
 routes.get('/cashlog', CashLogController.list);
-routes.get('/cashlog/account/:account', CashLogController.listByParam);
-routes.get('/cashlog/char/:char', CashLogController.listByParam);
 
 export default routes;
