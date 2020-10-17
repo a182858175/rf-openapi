@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import UserStatusController from './controllers/UserStatusController';
-import CashLogController from './controllers/CashLogController';
+import UserStatusController from './controllers/BILLING/userStatusController';
+import CashLogController from './controllers/BILLING/cashLogController';
+import baseController from './controllers/RF_World/baseController';
 
 const routes = Router();
 
@@ -15,7 +16,14 @@ routes.patch('/userstatus/:id', UserStatusController.update);
   CASHLOG ROUTES
 */
 routes.get('/cashlog', CashLogController.list);
-routes.get('/cashlog/account/:account', CashLogController.listByParam);
 routes.get('/cashlog/char/:char', CashLogController.listByParam);
+routes.get('/cashlog/account/:account', CashLogController.listByParam);
+
+/**
+ * BASE ROUTES
+ */
+routes.get('/base', baseController.list);
+routes.get('/base/name/:name', baseController.listByParam);
+routes.get('/base/account/:account', baseController.listByParam);
 
 export default routes;
