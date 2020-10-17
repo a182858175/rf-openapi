@@ -62,7 +62,7 @@ class userStatusController {
      */
 
     const { id } = req.params;
-    const args = ['cash', 'status', 'dtStartPrem', 'dtEndPrem']
+    const args = ['cash', 'status', 'dtStartPrem', 'dtEndPrem'];
 
     const billingRepo = getRepository(tbl_UserStatus, 'BILLING');
 
@@ -71,7 +71,7 @@ class userStatusController {
      */
     const user = await billingRepo.findOne({ where: { id } });
     if (!user) {
-      return res.status(400).send({ error: "User doesn't exists" })
+      return res.status(400).send({ error: "User doesn't exists" });
     }
 
     /**

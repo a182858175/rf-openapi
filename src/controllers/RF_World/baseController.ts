@@ -9,7 +9,7 @@ class baseController {
 
     const players = await worldRepo.find();
     if (!players) {
-      return res.status(400).send({ error: "Failed" })
+      return res.status(400).send({ error: "Failed" });
     }
 
     res.send(players);
@@ -23,7 +23,7 @@ class baseController {
 
     const players = await worldRepo.find({ where: `${url[2]} = '${url[3]}'` });
     if (!players) {
-      return res.status(400).send({ error: "Failed" })
+      return res.status(400).send({ error: "Failed" });
     }
 
     res.send(players);

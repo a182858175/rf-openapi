@@ -28,7 +28,6 @@ class cashLogController {
     return res.send(logs);
   }
 
-
 }
 
 export default new cashLogController();
