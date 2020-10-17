@@ -28,7 +28,7 @@ createConnections([
     password: process.env.MSSQL_PASSWORD,
     database: process.env.MSSQL_USER,
     entities: [
-      "src/models/user/**/*.ts"
+      "src/models/RF_User/**/*.ts"
     ],
     migrations: [
       "src/database/migrations/user/**/*.ts"
@@ -46,7 +46,7 @@ createConnections([
     password: process.env.MSSQL_PASSWORD,
     database: process.env.MSSQL_WORLD,
     entities: [
-      "src/models/world/**/*.ts"
+      "src/models/RF_World/**/*.ts"
     ],
     migrations: [
       "src/database/migrations/world/**/*.ts"
