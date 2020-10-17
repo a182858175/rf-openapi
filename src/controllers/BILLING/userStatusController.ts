@@ -34,11 +34,7 @@ class userStatusController {
     /**
      * Check if user already exists
      */
-    const userExists = await billingRepo.findOne({
-      where: {
-        id,
-      },
-    });
+    const userExists = await billingRepo.findOne({ where: { id } });
 
     if (userExists) {
       return res.status(400).send({ error: 'User already exists try update route' });
@@ -55,9 +51,9 @@ class userStatusController {
       dtEndPrem
     });
 
-    billingRepo.save(user);
-
-    res.send(user);
+    await billingRepo.save(user)
+      .then(() => res.send(user))
+      .catch(err => res.status(400).send({ error: "Failed to insert, check all your fields" }));
   }
 
   async update(req: Request, res: Response) {
@@ -89,7 +85,9 @@ class userStatusController {
 
     billingRepo.save(user);
 
-    res.send(user)
+    await billingRepo.save(user)
+      .then(() => res.send(user))
+      .catch(err => res.status(400).send({ error: "Failed to update, check all your fields" }));
 
   }
 }
