@@ -56,7 +56,7 @@ createConnections([
     }
   }
 ]).then(() => {
-  console.log("Connected to MSSQL Server")
+  console.log("Connected to MSSQL Server");
 }).catch((err) => {
-  console.log("Failed to connect to MSSQL Server")
-})
+  console.log("Failed to connect to MSSQL Server");
+});

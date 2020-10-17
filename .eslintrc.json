@@ -11,6 +11,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "object-property-newline": "error"
+    "object-property-newline": "error",
+    "semi": "error"
   }
 }
