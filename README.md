@@ -55,6 +55,13 @@ _You can check all availables endpoints inside src/routes_
 
 | METHOD | URL                    | RETURN                                           |
 | ------ | ---------------------- | ------------------------------------------------ |
-| GET    | /base                  | tbl_CashLog information                          |
+| GET    | /base                  | tbl_base information                             |
 | GET    | /base/name/:name       | Query information about specified character name |
 | GET    | /base/account/:account | Query information about specified account name   |
+
+#### tbl_general
+
+| METHOD | URL                 | RETURN                                           |
+| ------ | ------------------- | ------------------------------------------------ |
+| GET    | /general            | tbl_general information                          |
+| GET    | /general/name/:name | Query information about specified character name |
