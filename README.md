@@ -5,6 +5,7 @@ This project is a open api for RF. It uses NodeJS to run and it's built using:
 - Typescript
 - Express
 - Typeorm
+- Yup
 - MSSQL
 
 The intuit is to facilitate the development of furthers application that requires database queries.
@@ -22,7 +23,7 @@ Run this command to install all dependencies needed.
 
 - `npm install`
 
-Once everything is installed. Run this command to start de API
+Once everything is installed. Run this command to start the API
 
 - `npm dev`
 
@@ -45,5 +46,15 @@ _You can check all availables endpoints inside src/routes_
 | METHOD | URL                       | RETURN                                      |
 | ------ | ------------------------- | ------------------------------------------- |
 | GET    | /cashlog                  | tbl_CashLog information                     |
-| GET    | /cashlog/account/:account | Query information about specified account   |
 | GET    | /cashlog/char/:char       | Query information about specified character |
+| GET    | /cashlog/account/:account | Query information about specified account   |
+
+### RF_World
+
+#### tbl_base
+
+| METHOD | URL                    | RETURN                                           |
+| ------ | ---------------------- | ------------------------------------------------ |
+| GET    | /base                  | tbl_CashLog information                          |
+| GET    | /base/name/:name       | Query information about specified character name |
+| GET    | /base/account/:account | Query information about specified account name   |
