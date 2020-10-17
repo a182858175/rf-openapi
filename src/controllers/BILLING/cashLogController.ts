@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { TblCashLog } from '../models/BILLING/TblCashLog';
+import { TblCashLog } from '../../models/BILLING/TblCashLog';
 
-class CashLogController {
+class cashLogController {
 
   async list(req: Request, res: Response) {
     const billingRepo = getRepository(TblCashLog, "BILLING");
@@ -12,7 +12,7 @@ class CashLogController {
       return res.send({ error: "Empty logs" });
     }
 
-    return res.send({ logs });
+    return res.send(logs);
   }
 
   async listByParam(req: Request, res: Response) {
@@ -25,10 +25,10 @@ class CashLogController {
       return res.status(400).send({ error: "Empty logs" });
     }
 
-    return res.send({ logs });
+    return res.send(logs);
   }
 
 
 }
 
-export default new CashLogController();
+export default new cashLogController();

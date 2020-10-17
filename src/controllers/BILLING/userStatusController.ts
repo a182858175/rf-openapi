@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { tbl_UserStatus } from '../models/BILLING/TblUserStatus';
+import { tbl_UserStatus } from '../../models/BILLING/TblUserStatus';
 import * as yup from 'yup';
 
-class UserStatusController {
+class userStatusController {
   async list(req: Request, res: Response) {
     const billingRepo = getRepository(tbl_UserStatus, 'BILLING');
 
@@ -94,4 +94,4 @@ class UserStatusController {
   }
 }
 
-export default new UserStatusController();
+export default new userStatusController();
